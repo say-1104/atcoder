@@ -1,7 +1,10 @@
 #include <bits/stdc++.h>
 
 using namespace std;
-vector<int> makesierpinski(vector<vector<int>> int k){
+vector<vector<int>> n;
+vector<int> makesierpinski(vector<vector<int>>& n, int k){
+	
+}
 
 };
 int main() {
