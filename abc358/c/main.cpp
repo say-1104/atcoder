@@ -1,38 +1,42 @@
 #include <iostream>
 #include <vector>
-
+#include <bitset>
+#include <climits>
+#include <algorithm>
 using namespace std;
 
 int main() {
 	int n, m;
-	int i, j;
-	string buff;
 	cin >> n >> m;
-	int ac = 0;
-	int maxac;
-	vector<vector<int> > s(n, vector<int>(m));
-	vector<int> tmp;
-	for(i=0; i<n; i++){
-		cin >> buff;
-		for (j=0; j<m; j++){
-			if(buff[j] == 'o') s[i][j] = 1;
-			else s[i][j] = 0;
-		}
+	vector<string> s;
+	for(int i=0; i<n; i++){
+		string tmp;
+		cin >> tmp;
+		s.push_back(tmp);
 	}
-	for(i=0; i<n; i++){
-		if(s[i][0] == 1){
-			ac = 1;
-			for (j=1; j<m; j++){
-				if(s[i][j] == 0) tmp.push_back(j);
-			}
-
-			for (j=0; j<n; j++){
-				if(j == )
-				if(s[i][j] == 0) tmp.push_back(j);
+	int min_count = INT_MAX;
+	for(int i=0; i < (1 << n); i++){
+		bool flag = true;
+		bitset<10> bs(i);
+		vector<int> col;
+		for(int j = 0; j < n; j++){
+			if(bs.test(j)){
+				col.push_back(j);
 			}
 		}
-	}
+		for(int j = 0; j < m; j++){
+			bool b = false;
+			for(int k = 0; k < col.size(); k++){
+				if(s[col[k]][j] == 'o') b = true;
+			}
+			if(!b) flag = false;
+		}
 
+		if(flag) {
+			min_count = min(min_count, int(col.size()));
+		}
+	}
+	cout << min_count << endl;
 	return 0;
 
 }
